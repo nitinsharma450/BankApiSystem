@@ -30,6 +30,11 @@ public class Controller {
 	 return	service.getAllAccount();
 
 	}
+
+	  @GetMapping("/get-user")
+    public List<User> getAllUsers() {
+        return service.getAllAccount();
+    }
 	
 	@PostMapping("/insert-user")
 	public ResponseEntity<String> insert(@RequestBody User user) {
