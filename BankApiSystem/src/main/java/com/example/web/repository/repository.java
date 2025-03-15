@@ -86,6 +86,22 @@ public class repository {
 		    }
 		}
 
+	public List<User> getAllAccounts() {
+        Session session = factory.openSession();
+        List<User> users = new ArrayList<>();
+        
+        try {
+            Query<User> query = session.createQuery("from User", User.class);
+            users = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("SOMETHING WENT WRONG RETRIEVING ALL ACCOUNTS");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+		return users;
+    }
+
 	
 
 }
