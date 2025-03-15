@@ -101,7 +101,16 @@ public class repository {
         }
 		return users;
     }
-
+public User getDetails(int AccountNumber) {
+			
+			Session session=factory.openSession();
+				User user=session.get(User.class, AccountNumber );
+				
+				session.close();
+				
+				return user;
+			
+		}
 	
 
 }
