@@ -36,13 +36,14 @@ public class serviceImplementation implements ServiceInterface {
 	@Override
 	public User getAccount(int Ac) {
 		// TODO Auto-generated method stub
-		return null;
+	return repo.getDetails(Ac);
+		
 	}
 
 	@Override
 	public List<User> getAllAccount() {
 		// TODO Auto-generated method stub
-		return null;
+		return repo.getAllAccounts();
 	}
 
 	@Override
