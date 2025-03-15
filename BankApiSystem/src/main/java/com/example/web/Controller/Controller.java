@@ -31,10 +31,10 @@ public class Controller {
 
 	}
 
-	  @GetMapping("/get-user")
-    public List<User> getAllUsers() {
-        return service.getAllAccount();
-    }
+	@GetMapping("/get-AccountDetails/{Ac-number}")
+	public User getDetails( @PathVariable("Ac-number") int Ac_number) {
+		return service.getAccount(Ac_number);
+	}
 	
 	@PostMapping("/insert-user")
 	public ResponseEntity<String> insert(@RequestBody User user) {
