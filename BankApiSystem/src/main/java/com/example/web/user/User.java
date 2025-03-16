@@ -2,7 +2,6 @@ package com.example.web.user;
 
 import java.sql.Date;
 
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +29,9 @@ public class User {
     @Column(name = "date_account_creation")
     private Date dateOfCreation;
 
+    @Column(name = "balance", nullable = false)
+    private Double balance = 0.0;
+
     public User() {
         // Default constructor (no need to call super())
     }
@@ -40,6 +42,7 @@ public class User {
         this.dob = dob;
         this.dateOfCreation = dateOfCreation;
         this.accountNumber = accountNumber;
+        this.balance = balance;
     }
 
     // Getters and Setters
@@ -83,8 +86,15 @@ public class User {
         this.accountNumber = accountNumber;
     }
 
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
     @Override
     public String toString() {
-        return "User [name=" + name + ", phoneNumber=" + phoneNumber + ", dob=" + dob + ", dateOfCreation=" + dateOfCreation + ", accountNumber=" + accountNumber + "]";
+        return "User [name=" + name + ", phoneNumber=" + phoneNumber + ", dob=" + dob + ", dateOfCreation=" + dateOfCreation + ", accountNumber=" + accountNumber + ", balance=" + balance+"]";
     }
 }
