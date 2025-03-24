@@ -2,8 +2,8 @@ package com.example.web.repository;
 
 
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -33,20 +33,16 @@ public class repository {
 	 
 	public void insert(User user) {
 		Transaction transaction=null;
-		Session session=factory.openSession();
-		
-		
-			transaction=session.beginTransaction();
-			
-			session.persist(user);
-			transaction.commit();
-		
-		
-			// TODO: handle exception
-			transaction.rollback();
-		
-		
-			session.close();
+            try (Session session = factory.openSession()) {
+                transaction=session.beginTransaction();
+                
+                session.persist(user);
+                transaction.commit();
+            }
+                catch(Exception e){
+                
+               
+                transaction.rollback();}
 		}
 		
 		public void deleteAccount(int AccountNumber) {
@@ -166,7 +162,7 @@ public class repository {
             user.setBalance(newBalance);
             
             // Update user in database
-            session.update(user);
+            session.merge(user);
             transaction.commit();
 			Date currentDate = new Date(Calendar.getInstance().getTimeInMillis());
 			com.example.web.transaction.Transaction txn = new com.example.web.transaction.Transaction(
@@ -236,5 +232,26 @@ public class repository {
     }
 	public List<com.example.web.transaction.Transaction> getTransactionHistory(Long accountNumber) {
         return transactionRepository.getTransactionsForAccount(accountNumber);
+    }
+    public void moneyTransfer(long ac1 ,long ac2, double amount){
+        Transaction transaction=null;
+        Session session =factory.openSession();
+        try {
+            transaction =session.beginTransaction();
+            User user1=session.get(User.class,ac1);
+            double newBalance=user1.getBalance()-amount;
+            user1.setBalance(newBalance);
+            User user2=session.get(User.class,ac2);
+            double newBalance2=user2.getBalance()+amount;
+            // deposit(ac2, amount, "Money transfer ");
+            user2.setBalance(newBalance2);
+            session.merge(user2);
+            session.merge(user1);
+            transaction.commit();
+            System.out.println("tranfered");
+        } catch (Exception e) {
+            transaction.rollback();
+        }
+        session.close();
     }
 }

@@ -61,5 +61,9 @@ public class serviceImplementation implements ServiceInterface {
     public List<Transaction> getTransactionHistory(Long accountNumber) {
         return repo.getTransactionHistory(accountNumber);
     }
+	@Override
+	public void moneyTransfer(long ac1,long ac2,double amount ){
+		repo.moneyTransfer(ac1, ac2, amount);
+	}
 
 }

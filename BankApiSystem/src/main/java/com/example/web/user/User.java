@@ -32,6 +32,9 @@ public class User {
     @Column(name = "balance", nullable = false)
     private Double balance = 0.0;
 
+    @Column(name ="type_of_account",nullable=false)
+    private String typeOfAccount;
+    
     public User() {
         // Default constructor (no need to call super())
     }

@@ -15,4 +15,5 @@ public interface ServiceInterface {
 	public boolean deposit(Long accountNumber, Double amount, String description);
     public boolean withdraw(Long accountNumber, Double amount, String description);
     public List<Transaction> getTransactionHistory(Long accountNumber);
+	public void moneyTransfer (long ac1,long ac2 ,double amount);
 }
